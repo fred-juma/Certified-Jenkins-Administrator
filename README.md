@@ -2,11 +2,11 @@
 
 #### In this repo, I document my journey in learning and implementing CI/CD through the various Jenkins labs and exercises that I solved.
 
-#### The course is offered by the [CloudBees University](https://university.cloudbees.com/) through a Self-paced training course delivered online through the CloudBees University site. The course included self-paced instruction, hands-on lab exercises, and access to CloudBees cloud-based lab environment.
+#### The course is offered by the [CloudBees University](https://university.cloudbees.com/) through a self-paced training course delivered online through the CloudBees University site. The course included self-paced instructions, hands-on lab exercises, and access to CloudBees cloud-based lab environment.
 
 #### Through this course I have been able to demonstrate understanding and implementation  of production grade CI/CD concepts and DevOps best practices. 
 
-#### The course is divided into 3 major sections:
+#### The content that I covered through the CJE course are as follows:
 
 #### 1. Jenkins Essentials: 
 
