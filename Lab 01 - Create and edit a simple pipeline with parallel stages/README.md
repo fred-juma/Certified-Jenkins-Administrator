@@ -6,4 +6,4 @@
 + Add parallel stages to a Pipeline.
 + Save a Pipeline to the master branch.
 
-![Pipleline Visualization](/images/Lab01. Pipeline visualization.PNG)
+![Pipleline Visualization](https://github.com/fred-juma/Certified-Jenkins-Administrator/blob/main/images/Lab01.%20Pipeline%20visualization.PNG)
