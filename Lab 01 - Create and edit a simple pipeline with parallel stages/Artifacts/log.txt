@@ -1,0 +1,333 @@
+Branch indexing
+ > git rev-parse --is-inside-work-tree # timeout=10
+Setting origin to ssh://git@gitserver:5022/butler/pipeline-lab.git
+ > git config remote.origin.url ssh://git@gitserver:5022/butler/pipeline-lab.git # timeout=10
+Fetching origin...
+Fetching upstream changes from origin
+ > git --version # timeout=10
+ > git config --get remote.origin.url # timeout=10
+using GIT_SSH to set credentials jenkins-generated-ssh-key
+ > git fetch --tags --force --progress -- origin +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/master
+Seen branch in repository origin/simple-pipeline
+Seen 2 remote branches
+Obtained Jenkinsfile from 4789fe9e512d46f16babe529715bbc4e88093e9f
+Running in Durability level: PERFORMANCE_OPTIMIZED
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on ssh-agent-1 in /home/jenkins/workspace/pipeline-lab_master
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+using credential jenkins-generated-ssh-key
+Fetching changes from the remote Git repository
+Cleaning workspace
+Fetching without tags
+Checking out Revision 4789fe9e512d46f16babe529715bbc4e88093e9f (master)
+Commit message: "Change to Simple Pipeline in master"
+ > git rev-parse --is-inside-work-tree # timeout=10
+ > git config remote.origin.url ssh://git@gitserver:5022/butler/pipeline-lab.git # timeout=10
+ > git rev-parse --verify HEAD # timeout=10
+Resetting working tree
+ > git reset --hard # timeout=10
+ > git clean -fdx # timeout=10
+Fetching upstream changes from ssh://git@gitserver:5022/butler/pipeline-lab.git
+ > git --version # timeout=10
+using GIT_SSH to set credentials jenkins-generated-ssh-key
+ > git fetch --no-tags --force --progress -- ssh://git@gitserver:5022/butler/pipeline-lab.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 4789fe9e512d46f16babe529715bbc4e88093e9f # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D master # timeout=10
+ > git checkout -b master 4789fe9e512d46f16babe529715bbc4e88093e9f # timeout=10
+ > git rev-list --no-walk 64ba18cdc712a2d8a0acce76c6d0d6b344f94596 # timeout=10
+Cleaning workspace
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Fluffy Build)
+[Pipeline] sh
++ ./jenkins/build.sh
+SHELL=/bin/bash
+JENKINS_SERVER_COOKIE=durable-ba40616d882e4280a13a20b0c1dfb947
+GIT_PREVIOUS_SUCCESSFUL_COMMIT=64ba18cdc712a2d8a0acce76c6d0d6b344f94596
+JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
+RUN_CHANGES_DISPLAY_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/5/display/redirect?page=changes
+PWD=/home/jenkins/workspace/pipeline-lab_master
+HUDSON_HOME=/var/jenkins_home
+LOGNAME=jenkins
+BUILD_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/5/
+JOB_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/
+BUILD_NUMBER=5
+JENKINS_NODE_COOKIE=8f9d7f03-9e59-417d-b2e0-628555f585f8
+BUILD_DISPLAY_NAME=#5
+HOME=/home/jenkins
+JENKINS_URL=http://localhost:5000/jenkins/
+JOB_BASE_NAME=master
+JOB_NAME=pipeline-lab/master
+RUN_DISPLAY_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/5/display/redirect
+SSH_CONNECTION=172.18.0.10 37616 172.18.0.7 22
+JOB_DISPLAY_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/display/redirect
+WORKSPACE=/home/jenkins/workspace/pipeline-lab_master
+GIT_PREVIOUS_COMMIT=64ba18cdc712a2d8a0acce76c6d0d6b344f94596
+HUDSON_URL=http://localhost:5000/jenkins/
+NODE_NAME=ssh-agent-1
+USER=jenkins
+HUDSON_SERVER_COOKIE=da413c944661ede6
+GIT_URL=ssh://git@gitserver:5022/butler/pipeline-lab.git
+SHLVL=3
+BUILD_TAG=jenkins-pipeline-lab-master-5
+EXECUTOR_NUMBER=1
+HUDSON_COOKIE=5559f425-3b3d-4a7e-bbcf-545815020633
+JENKINS_HOME=/var/jenkins_home
+LD_LIBRARY_PATH=/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/server:/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64:/usr/lib/jvm/java-1.8-openjdk/jre/../lib/amd64
+SSH_CLIENT=172.18.0.10 37616 22
+GIT_COMMIT=4789fe9e512d46f16babe529715bbc4e88093e9f
+STAGE_NAME=Fluffy Build
+NODE_LABELS=ssh-agent-1
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+GIT_LOCAL_BRANCH=master
+MAIL=/var/mail/jenkins
+BRANCH_NAME=master
+GIT_BRANCH=master
+BUILD_ID=5
+OLDPWD=/home/jenkins
+_=/usr/bin/env
+ > git rev-parse --verify HEAD # timeout=10
+Resetting working tree
+ > git reset --hard # timeout=10
+ > git clean -fdx # timeout=10
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.mycompany.app:my-app >----------------------
+[INFO] Building my-app 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ my-app ---
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ my-app ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/jenkins/workspace/pipeline-lab_master/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ my-app ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to /home/jenkins/workspace/pipeline-lab_master/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ my-app ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/jenkins/workspace/pipeline-lab_master/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ my-app ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 1 source file to /home/jenkins/workspace/pipeline-lab_master/target/test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ my-app ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- maven-jar-plugin:3.0.2:jar (default-jar) @ my-app ---
+[INFO] Building jar: /home/jenkins/workspace/pipeline-lab_master/target/my-app-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.913 s
+[INFO] Finished at: 2022-10-31T11:31:14Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] archiveArtifacts
+Archiving artifacts
+Recording fingerprints
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Fluffy Test)
+[Pipeline] parallel
+[Pipeline] { (Branch: Backend)
+[Pipeline] { (Branch: Frontend)
+[Pipeline] { (Branch: Performance)
+[Pipeline] { (Branch: Static)
+[Pipeline] stage
+[Pipeline] { (Backend)
+[Pipeline] stage
+[Pipeline] { (Frontend)
+[Pipeline] stage
+[Pipeline] { (Performance)
+[Pipeline] stage
+[Pipeline] { (Static)
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
++ ./jenkins/test-backend.sh
+SHELL=/bin/bash
+JENKINS_SERVER_COOKIE=durable-ba40616d882e4280a13a20b0c1dfb947
+GIT_PREVIOUS_SUCCESSFUL_COMMIT=64ba18cdc712a2d8a0acce76c6d0d6b344f94596
+JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
+RUN_CHANGES_DISPLAY_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/5/display/redirect?page=changes
+PWD=/home/jenkins/workspace/pipeline-lab_master
+HUDSON_HOME=/var/jenkins_home
+LOGNAME=jenkins
+BUILD_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/5/
+JOB_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/
+BUILD_NUMBER=5
+_=/usr/bin/env
+JENKINS_NODE_COOKIE=8f9d7f03-9e59-417d-b2e0-628555f585f8
+BUILD_DISPLAY_NAME=#5
+HOME=/home/jenkins
+JENKINS_URL=http://localhost:5000/jenkins/
+JOB_BASE_NAME=master
+JOB_NAME=pipeline-lab/master
+RUN_DISPLAY_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/5/display/redirect
+SSH_CONNECTION=172.18.0.10 37616 172.18.0.7 22
+JOB_DISPLAY_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/display/redirect
+WORKSPACE=/home/jenkins/workspace/pipeline-lab_master
+GIT_PREVIOUS_COMMIT=64ba18cdc712a2d8a0acce76c6d0d6b344f94596
+HUDSON_URL=http://localhost:5000/jenkins/
+NODE_NAME=ssh-agent-1
+USER=jenkins
+HUDSON_SERVER_COOKIE=da413c944661ede6
+GIT_URL=ssh://git@gitserver:5022/butler/pipeline-lab.git
+SHLVL=3
+BUILD_TAG=jenkins-pipeline-lab-master-5
+EXECUTOR_NUMBER=1
+HUDSON_COOKIE=efbde1ce-8d1a-433c-bee7-a129387b1765
+JENKINS_HOME=/var/jenkins_home
+LD_LIBRARY_PATH=/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/server:/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64:/usr/lib/jvm/java-1.8-openjdk/jre/../lib/amd64
+SSH_CLIENT=172.18.0.10 37616 22
+GIT_COMMIT=4789fe9e512d46f16babe529715bbc4e88093e9f
+STAGE_NAME=Backend
+NODE_LABELS=ssh-agent-1
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+GIT_LOCAL_BRANCH=master
+MAIL=/var/mail/jenkins
+BRANCH_NAME=master
+GIT_BRANCH=master
+BUILD_ID=5
+OLDPWD=/home/jenkins
++ ./jenkins/test-frontend.sh
+Testing Frontend...
++ ./jenkins/test-performance.sh
+Running Performance tests...
++ ./jenkins/test-static.sh
+Executing static analysis...
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.mycompany.app:my-app >----------------------
+[INFO] Building my-app 1.0-SNAPSHOT
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ my-app ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/jenkins/workspace/pipeline-lab_master/src/main/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ my-app ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 2 source files to /home/jenkins/workspace/pipeline-lab_master/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ my-app ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /home/jenkins/workspace/pipeline-lab_master/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.1:testCompile (default-testCompile) @ my-app ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ my-app ---
+[INFO] Surefire report directory: /home/jenkins/workspace/pipeline-lab_master/target/surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.mycompany.app.AppTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.067 sec
+Frontend Testing completed.
+[Pipeline] junit
+Recording test results
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.261 s
+[INFO] Finished at: 2022-10-31T11:31:20Z
+[INFO] ------------------------------------------------------------------------
+[Pipeline] archiveArtifacts
+Archiving artifacts
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+Static analysis complete.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+Performance tests done.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // parallel
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Fluffy Deploy)
+[Pipeline] sh
++ ./jenkins/deploy.sh staging
+SHELL=/bin/bash
+JENKINS_SERVER_COOKIE=durable-ba40616d882e4280a13a20b0c1dfb947
+GIT_PREVIOUS_SUCCESSFUL_COMMIT=64ba18cdc712a2d8a0acce76c6d0d6b344f94596
+JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk
+RUN_CHANGES_DISPLAY_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/5/display/redirect?page=changes
+PWD=/home/jenkins/workspace/pipeline-lab_master
+HUDSON_HOME=/var/jenkins_home
+LOGNAME=jenkins
+BUILD_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/5/
+JOB_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/
+BUILD_NUMBER=5
+_=/usr/bin/env
+JENKINS_NODE_COOKIE=8f9d7f03-9e59-417d-b2e0-628555f585f8
+BUILD_DISPLAY_NAME=#5
+HOME=/home/jenkins
+JENKINS_URL=http://localhost:5000/jenkins/
+JOB_BASE_NAME=master
+JOB_NAME=pipeline-lab/master
+RUN_DISPLAY_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/5/display/redirect
+SSH_CONNECTION=172.18.0.10 37616 172.18.0.7 22
+JOB_DISPLAY_URL=http://localhost:5000/jenkins/job/pipeline-lab/job/master/display/redirect
+WORKSPACE=/home/jenkins/workspace/pipeline-lab_master
+GIT_PREVIOUS_COMMIT=64ba18cdc712a2d8a0acce76c6d0d6b344f94596
+HUDSON_URL=http://localhost:5000/jenkins/
+NODE_NAME=ssh-agent-1
+USER=jenkins
+HUDSON_SERVER_COOKIE=da413c944661ede6
+GIT_URL=ssh://git@gitserver:5022/butler/pipeline-lab.git
+SHLVL=3
+BUILD_TAG=jenkins-pipeline-lab-master-5
+EXECUTOR_NUMBER=1
+HUDSON_COOKIE=a327b827-6828-48df-b250-427904c529dc
+JENKINS_HOME=/var/jenkins_home
+LD_LIBRARY_PATH=/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64/server:/usr/lib/jvm/java-1.8-openjdk/jre/lib/amd64:/usr/lib/jvm/java-1.8-openjdk/jre/../lib/amd64
+SSH_CLIENT=172.18.0.10 37616 22
+GIT_COMMIT=4789fe9e512d46f16babe529715bbc4e88093e9f
+STAGE_NAME=Fluffy Deploy
+NODE_LABELS=ssh-agent-1
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+GIT_LOCAL_BRANCH=master
+MAIL=/var/mail/jenkins
+BRANCH_NAME=master
+GIT_BRANCH=master
+BUILD_ID=5
+OLDPWD=/home/jenkins
+Deploying: staging
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
