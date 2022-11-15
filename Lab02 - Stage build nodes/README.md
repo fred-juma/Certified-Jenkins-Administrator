@@ -18,7 +18,7 @@
 
 
 Blue Ocean view               |    Stage view        | 
-:-------------------------:|:-------------------------:|:----------------------
+:-------------------------:|:-------------------------:|
 <img src="images/Lab02_stage_blue_ocean_viewjpg"  />|<img src="images/Lab02_stage_build_stage_view.jpg"  />|
 
 
