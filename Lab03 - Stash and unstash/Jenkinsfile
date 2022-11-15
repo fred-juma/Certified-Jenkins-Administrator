@@ -1,23 +1,143 @@
-### In this lab we create and edit a simple pipeline with parallel stages to build, test and deploy a simple-java-maven-app. 
+pipeline {
+  agent none
+  stages {
+    stage('Fluffy Build') {
+      parallel {
+        stage('Build Java 7') {
+          agent {
+            node {
+              label 'java7'
+            }
 
-### The lab demonstrates the concept of interractive input, stash and unstash
-+ **The Jenkins controller** (formerly known as the Jenkins master) is the Jenkins service itself. It is a webserver that also acts as a brain for deciding how, when, and where to run tasks.
+          }
+          steps {
+            sh './jenkins/build.sh'
+            archiveArtifacts(artifacts: 'target/*.jar', fingerprint: true)
+            stash(name: 'Buzz Java 7', includes: 'target/**')
+          }
+        }
 
-+ A **node** is a server where Jenkins runs tasks on executors. The Jenkins controller also runs on a node.
+        stage('Build Java 8') {
+          agent {
+            node {
+              label 'java8'
+            }
 
-+ An **executor** is effectively a thread used to execute tasks
+          }
+          environment {
+            BUZZ_NAME = 'Java 8 Bee'
+          }
+          steps {
+            sh './jenkins/build.sh'
+            archiveArtifacts(artifacts: 'target/*.jar', fingerprint: true)
+            stash(name: 'Buzz Java 8', includes: 'target/**')
+          }
+        }
 
-+ An *agent* is a tool that manages the executors on a remote node, on behalf of Jenkins.
+      }
+    }
 
-## Objectives of the lab:
-+ Defining global **agent none** meaning no default agent to use for all stages
-+ Running some stage builds on jdk7-node agent
-+ Running other stage builds on jdk-8-node agent
-+ setting stage-specific environment variables
+    stage('Fluffy Test') {
+      parallel {
+        stage('Backend jdk7') {
+          agent {
+            node {
+              label 'java7'
+            }
 
+          }
+          steps {
+            unstash 'Buzz Java 7'
+            sh './jenkins/test-backend.sh'
+            archiveArtifacts 'target/surefire-reports/**/TEST*.xml'
+          }
+        }
 
-Blue Ocean view               |    Stage view        | 
-:-------------------------:|:-------------------------:|
-![Pipleline Visualization](https://github.com/fred-juma/Certified-Jenkins-Administrator/blob/main/images/Lab02_stage_blue_ocean_view.JPG)|![Pipleline Visualization](https://github.com/fred-juma/Certified-Jenkins-Administrator/blob/main/images/Lab02_stage_build_stage_view.JPG)|
+        stage('Frontend jdk7') {
+          agent {
+            node {
+              label 'java7'
+            }
 
+          }
+          steps {
+            unstash 'Buzz Java 7'
+            sh './jenkins/test-frontend.sh'
+            junit 'target/test-results/**/TEST*.xml'
+          }
+        }
 
+        stage('Performance') {
+          agent {
+            node {
+              label 'java7'
+            }
+
+          }
+          steps {
+            sh './jenkins/test-performance.sh'
+          }
+        }
+
+        stage('Static') {
+          agent {
+            node {
+              label 'java7'
+            }
+
+          }
+          steps {
+            sh './jenkins/test-static.sh'
+          }
+        }
+
+        stage('Testing A jdk8') {
+          agent {
+            node {
+              label 'java8'
+            }
+
+          }
+          steps {
+            unstash 'Buzz Java 8'
+            sh './jenkins/test-backend.sh'
+          }
+        }
+
+        stage('Testing B jdk8') {
+          agent {
+            node {
+              label 'java8'
+            }
+
+          }
+          steps {
+            unstash 'Buzz Java 8'
+            sh './jenkins/test-backend.sh'
+          }
+        }
+
+      }
+    }
+
+    stage('Confirm to Deploy ') {
+      steps {
+        input(message: 'Deploy to staging?', ok: 'Yes, let\'s do it')
+      }
+    }
+
+    stage('Deploy to Staging') {
+      agent {
+        node {
+          label 'java8'
+        }
+
+      }
+      steps {
+        unstash 'Buzz Java 8'
+        sh './jenkins/deploy.sh staging'
+      }
+    }
+
+  }
+}
