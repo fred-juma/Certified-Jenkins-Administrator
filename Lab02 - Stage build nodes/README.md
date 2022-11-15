@@ -19,6 +19,6 @@
 
 Blue Ocean view               |    Stage view        | 
 :-------------------------:|:-------------------------:|
-<img src="images/Lab02_stage_blue_ocean_view.jpg"  />|<img src="images/Lab02_stage_build_stage_view.jpg"  />|
+![Pipleline Visualization](https://github.com/fred-juma/Certified-Jenkins-Administrator/blob/main/images/Lab02_stage_blue_ocean_view.JPG)|![Pipleline Visualization](https://github.com/fred-juma/Certified-Jenkins-Administrator/blob/main/images/Lab02_stage_build_stage_view.JPG)|
 
 
