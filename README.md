@@ -33,7 +33,7 @@ Topic covered include:
 #### 3. Pipeline Essentials
 Topic covered include:
 + Declarative Pipelines and pipeline parameters
-+ Implementing ranches 
++ Implementing branches 
 + Managing artifacts and fingerprints
 + Testing with JUnit
 + Environment Variables

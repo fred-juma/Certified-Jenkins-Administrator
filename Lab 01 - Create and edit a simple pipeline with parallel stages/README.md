@@ -1,4 +1,4 @@
-# Lab: Create and edit a simple pipeline with parallel stages
+# Lab: Create and edit a simple pipeline with parallel stages to build, test and deploy a simple-java-maven-app
 
 ## Objectives of the lab:
 + Create and run a Pipeline in a feature branch.
