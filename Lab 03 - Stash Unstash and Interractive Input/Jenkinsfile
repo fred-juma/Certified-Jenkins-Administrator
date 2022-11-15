@@ -13,7 +13,7 @@ pipeline {
           steps {
             sh './jenkins/build.sh'
             archiveArtifacts(artifacts: 'target/*.jar', fingerprint: true)
-            stash(name: 'Buzz Java 7', includes: 'target/**')
+            stash(name: 'Java 7', includes: 'target/**')
           }
         }
 
@@ -24,13 +24,9 @@ pipeline {
             }
 
           }
-          environment {
-            BUZZ_NAME = 'Java 8 Bee'
-          }
           steps {
             sh './jenkins/build.sh'
-            archiveArtifacts(artifacts: 'target/*.jar', fingerprint: true)
-            stash(name: 'Buzz Java 8', includes: 'target/**')
+            stash(name: 'Java 8', includes: 'target/**')
           }
         }
 
@@ -39,7 +35,7 @@ pipeline {
 
     stage('Fluffy Test') {
       parallel {
-        stage('Backend jdk7') {
+        stage('Backend Java 7') {
           agent {
             node {
               label 'java7'
@@ -47,13 +43,13 @@ pipeline {
 
           }
           steps {
-            unstash 'Buzz Java 7'
+            unstash 'Java 7'
             sh './jenkins/test-backend.sh'
             archiveArtifacts 'target/surefire-reports/**/TEST*.xml'
           }
         }
 
-        stage('Frontend jdk7') {
+        stage('Frontend Java 7') {
           agent {
             node {
               label 'java7'
@@ -61,13 +57,13 @@ pipeline {
 
           }
           steps {
-            unstash 'Buzz Java 7'
+            unstash 'Java 7'
             sh './jenkins/test-frontend.sh'
             junit 'target/test-results/**/TEST*.xml'
           }
         }
 
-        stage('Performance') {
+        stage('Performance Java 7') {
           agent {
             node {
               label 'java7'
@@ -75,11 +71,12 @@ pipeline {
 
           }
           steps {
+            unstash 'Java 7'
             sh './jenkins/test-performance.sh'
           }
         }
 
-        stage('Static') {
+        stage('Static Java 7') {
           agent {
             node {
               label 'java7'
@@ -87,11 +84,12 @@ pipeline {
 
           }
           steps {
+            unstash 'Java 7'
             sh './jenkins/test-static.sh'
           }
         }
 
-        stage('Testing A jdk8') {
+        stage('Backend Java 8') {
           agent {
             node {
               label 'java8'
@@ -99,12 +97,13 @@ pipeline {
 
           }
           steps {
-            unstash 'Buzz Java 8'
+            unstash 'Java 8'
             sh './jenkins/test-backend.sh'
+            archiveArtifacts 'target/surefire-reports/**/TEST*.xml'
           }
         }
 
-        stage('Testing B jdk8') {
+        stage('Frontend Java 8') {
           agent {
             node {
               label 'java8'
@@ -112,21 +111,48 @@ pipeline {
 
           }
           steps {
-            unstash 'Buzz Java 8'
-            sh './jenkins/test-backend.sh'
+            unstash 'Java 8'
+            sh './jenkins/test-frontend.sh'
+            junit 'target/test-results/**/TEST*.xml'
+          }
+        }
+
+        stage('Performance Java 8') {
+          agent {
+            node {
+              label 'java8'
+            }
+
+          }
+          steps {
+            unstash 'Java 8'
+            sh './jenkins/test-performance.sh'
+          }
+        }
+
+        stage('Static Java 8') {
+          agent {
+            node {
+              label 'java8'
+            }
+
+          }
+          steps {
+            unstash 'Java 8'
+            sh './jenkins/test-static.sh'
           }
         }
 
       }
     }
 
-    stage('Confirm to Deploy ') {
+    stage('Confirm Deploy stage') {
       steps {
-        input(message: 'Deploy to staging?', ok: 'Yes, let\'s do it')
+        input(message: 'Okay to deploy to staging?', ok: 'Yes')
       }
     }
 
-    stage('Deploy to Staging') {
+    stage('Fluffy Deploy') {
       agent {
         node {
           label 'java8'
@@ -134,7 +160,7 @@ pipeline {
 
       }
       steps {
-        unstash 'Buzz Java 8'
+        unstash 'Java 7'
         sh './jenkins/deploy.sh staging'
       }
     }

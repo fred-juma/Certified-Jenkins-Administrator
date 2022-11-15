@@ -12,8 +12,8 @@
 
 ## Objectives of the lab:
 + Defining global **agent none** meaning no default agent to use for all stages
-+ Running some stage builds on jdk7-node agent
-+ Running other stage builds on jdk-8-node agent
++ Control the node on which a Pipeline or individual stages run
++ Build and run tests in parallel on two different agent environments: Running some stage builds on jdk7-node agent while other stage builds on jdk-8-node agent
 + setting stage-specific environment variables
 
 
